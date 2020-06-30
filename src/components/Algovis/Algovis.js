@@ -18,7 +18,6 @@ export default class Algovis extends Component {
     algorithm: "mergeSort",
     arrayLength: 305,
     speed: 1,
-    isAnimating: false,
   };
 
   // Initialize the array with random numbers when this component mounts
@@ -55,11 +54,6 @@ export default class Algovis extends Component {
     this.setState({ speed });
   };
 
-  // An arrow function that changes the isAnimating state
-  handleIsAnimatingChange = (isAnimating) => {
-    this.setState({ isAnimating });
-  };
-
   // Mergesort animation
   mergeSort = () => {
     const animations = getMergeSortAnimations(this.state.array);
@@ -83,8 +77,6 @@ export default class Algovis extends Component {
         }, i * this.state.speed);
       }
     }
-
-    this.setState({ isAnimating: false });
   };
 
   // Quicksort animation
@@ -139,7 +131,7 @@ export default class Algovis extends Component {
 
   render() {
     // Extract the array and the algorithm from the state
-    const { array, algorithm, arrayLength, speed, isAnimating } = this.state;
+    const { array, algorithm, arrayLength, speed } = this.state;
 
     // Get the current width of the screen and adjust it acordingly for the styling
     const adjustWidth = Math.floor(
@@ -187,11 +179,9 @@ export default class Algovis extends Component {
           algorithm={algorithm}
           arrayLength={arrayLength}
           speed={speed}
-          isAnimating={isAnimating}
           handleAlgorithmChange={this.handleAlgorithmChange}
           handleArrayLengthChange={this.handleArrayLengthChange}
           handleSpeedChange={this.handleSpeedChange}
-          handleIsAnimatingChange={this.handleIsAnimatingChange}
           sortFunction={sortFunction}
         />
         <div className="container">
