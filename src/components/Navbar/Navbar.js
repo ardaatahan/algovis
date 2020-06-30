@@ -27,7 +27,7 @@ export default class Navbar extends Component {
               </Button>
             </Toolbar>
             <div>
-              <InputLabel style={{ marginTop: "12px" }}>
+              <InputLabel style={{ marginTop: "15px" }}>
                 Array Length
               </InputLabel>
               <Slider
@@ -41,6 +41,25 @@ export default class Navbar extends Component {
                   }
 
                   return this.props.handleArrayLengthChange(newValue);
+                }}
+                style={{ width: "100px", marginTop: "5px" }}
+              />
+            </div>
+            <div>
+              <InputLabel style={{ marginTop: "15px" }}>
+                Animation Speed
+              </InputLabel>
+              <Slider
+                value={11 - this.props.speed}
+                min={1}
+                max={10}
+                step={1}
+                onChange={(e, newValue) => {
+                  if (newValue === this.props.speed) {
+                    return;
+                  }
+
+                  return this.props.handleSpeedChange(newValue);
                 }}
                 style={{ width: "100px", marginTop: "5px" }}
               />
@@ -65,11 +84,6 @@ export default class Navbar extends Component {
                       Quick Sort
                     </Typography>
                   </MenuItem>
-                  <MenuItem value="heapSort">
-                    <Typography style={{ color: "black" }}>
-                      Heap Sort
-                    </Typography>
-                  </MenuItem>
                   <MenuItem value="bubbleSort">
                     <Typography style={{ color: "black" }}>
                       Bubble Sort
@@ -77,6 +91,11 @@ export default class Navbar extends Component {
                   </MenuItem>
                 </Select>
               </FormControl>
+            </Toolbar>
+            <Toolbar>
+              <Button onClick={() => this.props.sortFunction()}>
+                <Typography style={{ color: "black" }}>Sort</Typography>
+              </Button>
             </Toolbar>
           </div>
         </AppBar>

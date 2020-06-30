@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import Navbar from "../Navbar/Navbar";
+import {
+  getMergeSortAnimations,
+  getQuickSortAnimations,
+  getBubbleSortAnimations,
+} from "../../algorithms/Algorithms";
 
-import styles from "./Algovis.module.css";
+import "./Algovis.css";
+
+const primaryColor = "#af5166";
+const secondaryColor = "turquoise";
 
 export default class Algovis extends Component {
   // The current state of the array
@@ -9,6 +17,8 @@ export default class Algovis extends Component {
     array: [],
     algorithm: "mergeSort",
     arrayLength: 305,
+    speed: 1,
+    isAnimating: false,
   };
 
   // Initialize the array with random numbers when this component mounts
@@ -39,9 +49,97 @@ export default class Algovis extends Component {
     this.resetArray();
   };
 
+  // An arrow function that changes the animation speed
+  handleSpeedChange = (newValue) => {
+    const speed = 11 - newValue;
+    this.setState({ speed });
+  };
+
+  // An arrow function that changes the isAnimating state
+  handleIsAnimatingChange = (isAnimating) => {
+    this.setState({ isAnimating });
+  };
+
+  // Mergesort animation
+  mergeSort = () => {
+    const animations = getMergeSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("bar");
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? secondaryColor : primaryColor;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.state.speed);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * this.state.speed);
+      }
+    }
+
+    this.setState({ isAnimating: false });
+  };
+
+  // Quicksort animation
+  quickSort = () => {
+    const animatingArray = getQuickSortAnimations(this.state.array);
+    for (let i = 0; i < animatingArray.length; i++) {
+      const arrayBars = document.getElementsByClassName("bar");
+      const isColorChange = i % 4 <= 1;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animatingArray[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 4 === 0 ? secondaryColor : primaryColor;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.state.speed);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animatingArray[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * this.state.speed);
+      }
+    }
+  };
+
+  // Bubblesort animation
+  bubbleSort = () => {
+    const animatingArray = getBubbleSortAnimations(this.state.array);
+    for (let i = 0; i < animatingArray.length; i++) {
+      const arrayBars = document.getElementsByClassName("bar");
+      const isColorChange = i % 4 <= 1;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animatingArray[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 4 === 0 ? secondaryColor : primaryColor;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * this.state.speed);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animatingArray[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * this.state.speed);
+      }
+    }
+  };
+
   render() {
     // Extract the array and the algorithm from the state
-    const { array, algorithm, arrayLength } = this.state;
+    const { array, algorithm, arrayLength, speed, isAnimating } = this.state;
 
     // Get the current width of the screen and adjust it acordingly for the styling
     const adjustWidth = Math.floor(
@@ -70,6 +168,17 @@ export default class Algovis extends Component {
 
     const margin = `${adjustMargin}px`;
 
+    // Set the sort function accordingly
+    let sortFunction = this.mergeSort;
+
+    if (this.state.algorithm === "mergeSort") {
+      sortFunction = this.mergeSort;
+    } else if (this.state.algorithm === "quickSort") {
+      sortFunction = this.quickSort;
+    } else if (this.state.algorithm === "bubbleSort") {
+      sortFunction = this.bubbleSort;
+    }
+
     // Return the bars represented by the numeric values of the elements of the array
     return (
       <>
@@ -77,19 +186,25 @@ export default class Algovis extends Component {
           reset={this.resetArray}
           algorithm={algorithm}
           arrayLength={arrayLength}
+          speed={speed}
+          isAnimating={isAnimating}
           handleAlgorithmChange={this.handleAlgorithmChange}
           handleArrayLengthChange={this.handleArrayLengthChange}
+          handleSpeedChange={this.handleSpeedChange}
+          handleIsAnimatingChange={this.handleIsAnimatingChange}
+          sortFunction={sortFunction}
         />
-        <div className={styles.container}>
+        <div className="container">
           {array.map((el, i) => (
             <p
-              className={styles.bar}
+              className="bar"
               key={i}
               style={{
                 height: `${el}px`,
                 width,
                 marginLeft: margin,
                 marginRight: margin,
+                backgroundColor: primaryColor,
               }}
             ></p>
           ))}
@@ -102,18 +217,3 @@ export default class Algovis extends Component {
 // Function taken from https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript?rq=1
 const randomIntFromInterval = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
-
-// A helper arrow function that checks whether two arrays are equal
-// const areArraysEqual = (arr1, arr2) => {
-//   if (arr1.length !== arr2.length) {
-//     return false;
-//   }
-
-//   for (let i = 0; i < arr1.length; i++) {
-//     if (arr1[i] !== arr2[i]) {
-//       return false;
-//     }
-//   }
-
-//   return true;
-// };
