@@ -1,0 +1,11 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: rotate(180deg);
+}
+
+.bar {
+  background-color: #af5166;
+  display: inline-block;
+}
