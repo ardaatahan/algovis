@@ -77,6 +77,8 @@ export default class Algovis extends Component {
         }, i * this.state.speed);
       }
     }
+
+    console.log(this.state.isAnimating);
   };
 
   // Quicksort animation
@@ -131,7 +133,7 @@ export default class Algovis extends Component {
 
   render() {
     // Extract the array and the algorithm from the state
-    const { array, algorithm, arrayLength, speed } = this.state;
+    const { array, algorithm, arrayLength, speed, isAnimating } = this.state;
 
     // Get the current width of the screen and adjust it acordingly for the styling
     const adjustWidth = Math.floor(
@@ -179,6 +181,7 @@ export default class Algovis extends Component {
           algorithm={algorithm}
           arrayLength={arrayLength}
           speed={speed}
+          isAnimating={isAnimating}
           handleAlgorithmChange={this.handleAlgorithmChange}
           handleArrayLengthChange={this.handleArrayLengthChange}
           handleSpeedChange={this.handleSpeedChange}

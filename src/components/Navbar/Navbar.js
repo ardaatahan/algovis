@@ -20,7 +20,10 @@ export default class Navbar extends Component {
         <AppBar position="fixed" style={{ background: "turquoise" }}>
           <div className={styles.container}>
             <Toolbar>
-              <Button onClick={() => this.props.reset()}>
+              <Button
+                onClick={() => this.props.reset()}
+                disabled={this.props.isAnimating}
+              >
                 <Typography style={{ color: "black" }}>
                   Generate New Array
                 </Typography>
@@ -43,6 +46,7 @@ export default class Navbar extends Component {
                   return this.props.handleArrayLengthChange(newValue);
                 }}
                 style={{ width: "100px", marginTop: "5px" }}
+                disabled={this.props.isAnimating}
               />
             </div>
             <div>
@@ -62,6 +66,7 @@ export default class Navbar extends Component {
                   return this.props.handleSpeedChange(newValue);
                 }}
                 style={{ width: "100px", marginTop: "5px" }}
+                disabled={this.props.isAnimating}
               />
             </div>
             <Toolbar>
@@ -73,6 +78,7 @@ export default class Navbar extends Component {
                   inputProps={{
                     name: "age",
                   }}
+                  disabled={this.props.isAnimating}
                 >
                   <MenuItem value="mergeSort">
                     <Typography style={{ color: "black" }}>
@@ -93,7 +99,10 @@ export default class Navbar extends Component {
               </FormControl>
             </Toolbar>
             <Toolbar>
-              <Button onClick={() => this.props.sortFunction()}>
+              <Button
+                onClick={() => this.props.sortFunction()}
+                disabled={this.props.isAnimating}
+              >
                 <Typography style={{ color: "black" }}>Sort</Typography>
               </Button>
             </Toolbar>
