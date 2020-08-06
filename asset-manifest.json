@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/algovis-without-hooks/static/css/main.9dbad6c1.chunk.css",
+    "main.js": "/algovis-without-hooks/static/js/main.fe226341.chunk.js",
+    "main.js.map": "/algovis-without-hooks/static/js/main.fe226341.chunk.js.map",
+    "runtime-main.js": "/algovis-without-hooks/static/js/runtime-main.164a8be1.js",
+    "runtime-main.js.map": "/algovis-without-hooks/static/js/runtime-main.164a8be1.js.map",
+    "static/js/2.e59e11c8.chunk.js": "/algovis-without-hooks/static/js/2.e59e11c8.chunk.js",
+    "static/js/2.e59e11c8.chunk.js.map": "/algovis-without-hooks/static/js/2.e59e11c8.chunk.js.map",
+    "index.html": "/algovis-without-hooks/index.html",
+    "precache-manifest.1a8f250c2e942c7c97f358d56382016f.js": "/algovis-without-hooks/precache-manifest.1a8f250c2e942c7c97f358d56382016f.js",
+    "service-worker.js": "/algovis-without-hooks/service-worker.js",
+    "static/css/main.9dbad6c1.chunk.css.map": "/algovis-without-hooks/static/css/main.9dbad6c1.chunk.css.map",
+    "static/js/2.e59e11c8.chunk.js.LICENSE.txt": "/algovis-without-hooks/static/js/2.e59e11c8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.164a8be1.js",
+    "static/js/2.e59e11c8.chunk.js",
+    "static/css/main.9dbad6c1.chunk.css",
+    "static/js/main.fe226341.chunk.js"
+  ]
+}
