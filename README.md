@@ -1,7 +1,7 @@
 # ALGOVIS
 Algovis is a website built with React that allows the user to visualize various sorting algorithms (Merge Sort, Quick Sort, Bubble Sort) and gain insights about how these algorithms actually work under the hood.
 
-The deployed site can be accessed here: https://ardaatahan.github.io/algovis/
+The deployed site can be accessed here: https://ardaatahan.github.io/algovis-without-hooks/
 
 Algovis enables the users to do the following:
   - Select from a variety of sorting algorithms (Merge Sort, Quick Sort, Bubble Sort)
